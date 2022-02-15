@@ -66,4 +66,39 @@ ball.color("blue")
 ball.penup()
 ball.goto(0, 0)
 
-turtle.exitonclick()
+
+# Functions to move paddle vertically
+def left_paddle_up():
+	y = left_pad.ycor()
+	y += 20
+	left_pad.sety(y)
+
+
+def left_paddle_down():
+	y = left_pad.ycor()
+	y -= 20
+	left_pad.sety(y)
+
+
+def right_paddle_up():
+	y = right_pad.ycor()
+	y += 20
+	right_pad.sety(y)
+
+
+def right_paddle_down():
+	y = right_pad.ycor()
+	y -= 20
+	right_pad.sety(y)
+
+
+# Keyboard bindings
+sc.listen()
+sc.onkeypress(left_paddle_up, "w")
+sc.onkeypress(left_paddle_down, "s")
+sc.onkeypress(right_paddle_up, "Up")
+sc.onkeypress(right_paddle_down, "Down")
+
+
+while True:
+	sc.update()
