@@ -9,7 +9,6 @@ sc.bgcolor("white")
 sc.setup(width=1000, height=600)
 
 
-
 # Left paddle
 left_pad = turtle.Turtle()
 left_pad.speed(0)
@@ -30,6 +29,17 @@ right_pad.penup()
 right_pad.goto(400, 0)
 
 
+# Ball of circle shape
+hit_ball = turtle.Turtle()
+hit_ball.speed(40)
+hit_ball.shape("circle")
+hit_ball.color("blue")
+hit_ball.penup()
+hit_ball.goto(0, 0)
+hit_ball.dx = 5
+hit_ball.dy = -5
+
+
 # Initialize the score
 left_player = 0
 right_player = 0
@@ -41,30 +51,8 @@ sketch.speed(0)
 sketch.color("blue")
 sketch.penup()
 sketch.hideturtle()
-sketch.goto(-100, 260)
-sketch.write("0", align="center", font=("Courier", 32, "normal"))
-sketch.goto(100, 260)
-sketch.write("0", align="center", font=("Courier", 32, "normal"))
-
-# Displays Vertical Line
-sketch.width(5)
-sketch.color("grey")
-sketch.goto(0, 300)
-sketch.right(90)
-sketch.pendown()
-for i in range(12):
-	sketch.forward(25)
-	sketch.penup()
-	sketch.forward(25)
-	sketch.pendown()
-
-# Ball of circle shape
-ball = turtle.Turtle()
-ball.speed(40)
-ball.shape("circle")
-ball.color("blue")
-ball.penup()
-ball.goto(0, 0)
+sketch.goto(0, 260)
+sketch.write("Left_player : 0 Right_player: 0", align="center", font=("Courier", 24, "normal"))
 
 
 # Functions to move paddle vertically
@@ -102,3 +90,15 @@ sc.onkeypress(right_paddle_down, "Down")
 
 while True:
 	sc.update()
+
+	hit_ball.setx(hit_ball.xcor()+hit_ball.dx)
+	hit_ball.sety(hit_ball.ycor()+hit_ball.dy)
+
+	# Checking borders
+	if hit_ball.ycor() > 280:
+		hit_ball.sety(280)
+		hit_ball.dy *= -1
+
+	if hit_ball.ycor() < -280:
+		hit_ball.sety(-280)
+		hit_ball.dy *= -1
