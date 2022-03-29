@@ -30,14 +30,14 @@ right_pad.goto(400, 0)
 
 
 # Ball of circle shape
-ball = turtle.Turtle()
-ball.speed(40)
-ball.shape("circle")
-ball.color("blue")
-ball.penup()
-ball.goto(0, 0)
-ball.dx = 5
-ball.dy = -5
+hit_ball = turtle.Turtle()
+hit_ball.speed(40)
+hit_ball.shape("circle")
+hit_ball.color("blue")
+hit_ball.penup()
+hit_ball.goto(0, 0)
+hit_ball.dx = 5
+hit_ball.dy = -5
 
 
 # Initialize the score
@@ -91,14 +91,27 @@ sc.onkeypress(right_paddle_down, "Down")
 while True:
 	sc.update()
 
-	ball.setx(ball.xcor()+ball.dx)
-	ball.sety(ball.ycor()+ball.dy)
+	hit_ball.setx(hit_ball.xcor()+hit_ball.dx)
+	hit_ball.sety(hit_ball.ycor()+hit_ball.dy)
 
 	# Checking borders
-	if ball.ycor() > 280:
-		ball.sety(280)
-		ball.dy *= -1
+	if hit_ball.ycor() > 280:
+		hit_ball.sety(280)
+		hit_ball.dy *= -1
 
-	if ball.ycor() < -280:
-		ball.sety(-280)
-		ball.dy *= -1
+	if hit_ball.ycor() < -280:
+		hit_ball.sety(-280)
+		hit_ball.dy *= -1
+
+	# Paddle ball collision
+	if (hit_ball.xcor() > 360 and
+						hit_ball.xcor() < 370) and (hit_ball.ycor() < right_pad.ycor()+40 and
+						hit_ball.ycor() > right_pad.ycor()-40):
+		hit_ball.setx(360)
+		hit_ball.dx*=-1
+		
+	if (hit_ball.xcor()<-360 and
+					hit_ball.xcor()>-370) and (hit_ball.ycor()<left_pad.ycor()+40 and
+						hit_ball.ycor()>left_pad.ycor()-40):
+		hit_ball.setx(-360)
+		hit_ball.dx*=-1
