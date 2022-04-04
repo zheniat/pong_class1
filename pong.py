@@ -70,8 +70,9 @@ def left_paddle_down():
 
 def right_paddle_up():
 	y = right_pad.ycor()
-	y += 20
-	right_pad.sety(y)
+	if y < 260:
+		y += 20
+		right_pad.sety(y)
 
 
 def right_paddle_down():
@@ -117,15 +118,8 @@ while True:
 		hit_ball.dx*=-1
 	
 	if(hit_ball.xcor() > 500):
-		left_player += 1
-		hit_ball.goto(0, 0)
-		sketch.clear()
 		sketch.write("Left_player : {} Right_player: {}".format(
 								left_player, right_player), align="center",
 								font=("Courier", 24, "normal"))
-
-	
-	if(hit_ball.xcor() < -500):
-		hit_ball.goto(0, 0)
 	
 
